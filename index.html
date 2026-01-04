@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aroma DevLabs - Loading</title>
+    <link rel="stylesheet" href="aroma_style.css">
+</head>
+<body>
+    <div class="background" id="background"></div>
+    <div class="overlay" id="overlay"></div>
+    <div class="frost-overlay"></div>
+    
+    <!-- Starfield -->
+    <div class="starfield" id="starfield"></div>
+    
+    <!-- Weather Container -->
+    <div class="weather-container" id="weatherContainer"></div>
+    
+    <!-- Particle System -->
+    <div class="particles" id="particles"></div>
+    
+    <div class="corners">
+        <div class="corner-tl"></div>
+        <div class="corner-tr"></div>
+        <div class="corner-bl"></div>
+        <div class="corner-br"></div>
+    </div>
+
+    <!-- Visibility Toggle Button -->
+    <button class="visibility-toggle" id="visibilityToggle" title="Toggle UI Visibility">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+        </svg>
+    </button>
+
+    <!-- Top Progress Strip -->
+    <div class="top-progress-strip ui-element">
+        <div class="progress-text" data-text="Initializing city_base Core Systems...">Initializing city_base Core Systems...</div>
+        <div class="progress-bar-mini"></div>
+    </div>
+
+    <div class="content ui-element">
+        <!-- Top Left: Logo and Branding -->
+        <div class="logo-center">
+            <img src="logo.png" alt="Aroma DevLabs Logo" class="logo-image">
+            <div class="brand-title">AROMA DEVLABS</div>
+            <div class="subtitle">CHICAGO CORE SERVER BUILD</div>
+            <div class="version">Version 1.0</div>
+        </div>
+    </div>
+
+    <!-- Weather Control Panel -->
+    <div class="weather-control ui-element">
+        <div class="weather-title">Weather Control</div>
+        <div class="weather-buttons">
+            <button class="weather-button active" id="weatherSnow">
+                <span class="weather-icon">❄️</span>
+                <span class="weather-label">Snow</span>
+            </button>
+            <button class="weather-button" id="weatherRain">
+                <span class="weather-icon">🌧️</span>
+                <span class="weather-label">Rain</span>
+            </button>
+            <button class="weather-button" id="weatherClear">
+                <span class="weather-icon">☀️</span>
+                <span class="weather-label">Clear</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Server Info -->
+    <div class="top-left ui-element">
+        <div class="server-info">
+            <div class="info-title">Server Information</div>
+            <div class="info-text">
+                aroma_info.
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Center: Loading Bar -->
+    <div class="bottom-center ui-element">
+        <div class="loading-container">
+            <div class="loading-bar-bg">
+                <div class="loading-bar" id="loadingBar"></div>
+            </div>
+            <div class="loading-text">Loading into city_name...</div>
+        </div>
+    </div>
+
+    <div class="city-Base ui-element">CHICAGO</div>
+
+    <!-- Bottom Left: Loading Tips -->
+    <div class="bottom-left ui-element">
+        <div class="tips-container">
+            <div class="tips-icon">💡</div>
+            <div class="tips-content">
+                <div class="tips-label">Tip:</div>
+                <div class="tips-text" id="loadingTip"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Music Control -->
+    <div class="music-control ui-element">
+        <!-- Volume Slider -->
+        <div class="volume-control">
+            <svg class="volume-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+            </svg>
+            <input 
+                type="range" 
+                id="volumeSlider" 
+                class="volume-slider" 
+                min="0" 
+                max="100" 
+                value="100"
+            >
+            <span class="volume-percent" id="volumePercent">100%</span>
+        </div>
+        
+        <!-- Music Controls -->
+        <div class="music-controls-wrapper">
+            <!-- Previous Button -->
+            <div class="music-nav-button" id="prevButton">
+                <svg class="nav-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+                </svg>
+            </div>
+            
+            <!-- Play/Pause Button -->
+            <div class="music-button" id="musicButton">
+                <svg class="music-icon" id="musicIcon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                </svg>
+            </div>
+            
+            <!-- Next Button -->
+            <div class="music-nav-button" id="nextButton">
+                <svg class="nav-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+                </svg>
+            </div>
+        </div>
+        
+        <!-- Track Info -->
+        <div class="track-info" id="trackInfo">Track 1</div>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="backgroundMusic" loop preload="auto">
+        <source src="" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Executive Team Panel -->
+    <div class="executive-team-panel ui-element">
+        <div class="executive-team-header">
+            <span class="executive-team-icon">👥</span>
+            <span class="executive-team-title">Executive Team</span>
+        </div>
+        <div class="executive-team-content" id="executiveTeamContent">
+            <!-- Will be populated by JavaScript -->
+        </div>
+        <div class="executive-team-nav" id="executiveTeamNav" style="display: none;">
+            <button class="executive-nav-btn" id="execPrevBtn" title="Previous">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                </svg>
+            </button>
+            <div class="executive-page-dots" id="execPageDots"></div>
+            <button class="executive-nav-btn" id="execNextBtn" title="Next">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Updates Panel -->
+    <div class="updates-panel ui-element">
+        <div class="updates-header">
+            <span class="updates-icon">📣</span>
+            <span class="updates-title">Latest Updates</span>
+        </div>
+        <div class="updates-content">
+            <div class="update-item">
+                <div class="update-date">Jan 4, 2026</div>
+                <div class="update-title">Title_Here</div>
+                <div class="update-description">
+                    description_content_here
+                </div>
+                <span class="update-badge badge-new">NEW</span>
+            </div>
+
+            <div class="update-item">
+                <div class="update-date">set_date_here</div>
+                <div class="update-title">Title_Here</div>
+                <div class="update-description">
+                    description_content_here
+                </div>
+                <span class="update-badge badge-update">UPDATE</span>
+            </div>
+
+            <div class="update-item">
+                <div class="update-date">set_date_here</div>
+                <div class="update-title">Title_Here</div>
+                <div class="update-description">
+                    description_content_here
+                </div>
+                <span class="update-badge badge-update">UPDATE</span>
+            </div>
+
+            <div class="update-item">
+                <div class="update-date">set_date_here</div>
+                <div class="update-title">Title_Here</div>
+                <div class="update-description">
+                    description_content_here
+                </div>
+                <span class="update-badge badge-event">EVENT</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Discord Activity Feed Panel -->
+    <div class="discord-feed-panel ui-element">
+        <div class="discord-feed-header">
+            <span class="discord-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+                </svg>
+            </span>
+            <span class="discord-feed-title">Discord Activity</span>
+            <button class="discord-refresh-btn" id="discordRefreshBtn" title="Refresh">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+                </svg>
+            </button>
+        </div>
+        <div class="discord-feed-content" id="discordFeedContent">
+            <div class="discord-loading">
+                <div class="discord-spinner"></div>
+                <p>Connecting to Discord...</p>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright Text -->
+    <!-- Please do not change -->
+    <div class="copyright-container">
+        <div class="copyright-text" data-text="© 2026 AROMA DEVLABS - ALL RIGHTS RESERVED"> 
+            © 2026 AROMA DEVLABS - ALL RIGHTS RESERVED 
+        </div>
+    </div>
+    <!-- Load Scripts -->
+    <script src="config.js"></script>
+    <script src="aroma_discord_api.js"></script>
+</body>
+</html>
